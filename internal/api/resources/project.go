@@ -1,18 +1,19 @@
-package client
+package resources
 
 import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/jsdbroughton/speckle-go/internal/api/client"
 	"github.com/jsdbroughton/speckle-go/internal/api/models"
 	"net/http"
 )
 
 type ProjectResource struct {
-	Client *Client
+	Client *client.Client
 }
 
-func NewProjectResource(client *Client) *ProjectResource {
+func NewProjectResource(client *client.Client) *ProjectResource {
 	return &ProjectResource{Client: client}
 }
 
