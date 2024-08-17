@@ -18,7 +18,7 @@ func main() {
 	}
 
 	// Replace this with an actual project ID from your Speckle server
-	projectID := "your-project-id-here"
+	projectID := "2f088c4d2e"
 
 	c := client.NewClient(baseURL, token)
 

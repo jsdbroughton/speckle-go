@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/specklesystems/speckle-go/internal/api/models"
+	"github.com/jsdbroughton/speckle-go/internal/api/models"
 )
 
 type Client struct {

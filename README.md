@@ -1,5 +1,5 @@
-# <div align="center">
-  <img src="https://user-images.githubusercontent.com/2679513/131189167-18ea5fe1-c578-47f6-9785-3748178e4312.png" width="150px"/><br/>
+<div>
+  <img alt="the speckle cube" src="https://user-images.githubusercontent.com/2679513/131189167-18ea5fe1-c578-47f6-9785-3748178e4312.png" width="150px"/><br/>
   Speckle | speckle-go 🐹
 </div>
 
@@ -19,13 +19,13 @@ This is the Go implementation of the Speckle SDK.
 - `examples`: Example code
 - `tests`: Additional external tests
 
-<h3 align="center">
+<h3 >
     The Go SDK
 </h3>
 
-<p align="center"><b>Speckle</b> is the data infrastructure for the AEC industry.</p>
+<p ><b>Speckle</b> is the data infrastructure for the AEC industry.</p>
 
-<p align="center">
+<p>
   <a href="https://twitter.com/SpeckleSystems"><img src="https://img.shields.io/twitter/follow/SpeckleSystems?style=social" alt="Twitter Follow"></a>
   <a href="https://speckle.community"><img src="https://img.shields.io/discourse/users?server=https%3A%2F%2Fspeckle.community&style=flat-square&logo=discourse&logoColor=white" alt="Community forum users"></a>
   <a href="https://speckle.systems"><img src="https://img.shields.io/badge/https://-speckle.systems-royalblue?style=flat-square" alt="website"></a>
@@ -33,7 +33,7 @@ This is the Go implementation of the Speckle SDK.
 </p>
 
 <!-- TODO: Replace with actual Go-specific badges -->
-<p align="center">
+<p >
   <a href="https://github.com/specklesystems/speckle-go/"><img src="https://img.shields.io/badge/build-passing-brightgreen?style=flat-square" alt="Build Status"></a>
   <a href="https://codecov.io/gh/specklesystems/speckle-go">
     <img src="https://img.shields.io/badge/coverage-80%25-yellowgreen?style=flat-square" alt="Code Coverage"/>

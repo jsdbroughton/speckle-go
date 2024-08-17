@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/specklesystems/speckle-go/internal/objects"
+	"github.com/jsdbroughton/speckle-go/internal/objects"
 )
 
 // ToJSON converts a Speckle object to its JSON representation
@@ -25,4 +25,3 @@ func FromJSON(data []byte) (*objects.Base, error) {
 // TODO: Implement more complex serialization methods, e.g.:
 // func SerializeDetached(obj *objects.Base) (string, []objects.Base, error) {}
 // func DeserializeDetached(data string, objects map[string]*objects.Base) (*objects.Base, error) {}
-
