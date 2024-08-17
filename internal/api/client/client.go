@@ -1,65 +1,71 @@
 package client
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"time"
-
-	"github.com/jsdbroughton/speckle-go/internal/api/models"
 )
 
 type Client struct {
 	BaseURL    string
 	HTTPClient *http.Client
 	Token      string
+	Account    *Account
+
+	Server     *ServerResource
+	User       *UserResource
+	OtherUser  *OtherUserResource
+	ActiveUser *ActiveUserResource
+	Project    *ProjectResource
+	Version    *VersionResource
+	Model      *ModelResource
+	Object     *ObjectResource
+	Subscribe  *SubscriptionResource
 }
 
-func NewClient(baseURL, token string) *Client {
-	return &Client{
-		BaseURL: baseURL,
+// Account structure
+type Account struct {
+	Token string
+}
+
+// NewClient initializes a new Speckle Client
+func NewClient(baseURL string, useSSL, verifyCertificate bool) *Client {
+	scheme := "http"
+	if useSSL {
+		scheme = "https"
+	}
+
+	client := &Client{
+		BaseURL: fmt.Sprintf("%s://%s", scheme, baseURL),
 		HTTPClient: &http.Client{
 			Timeout: time.Second * 30,
 		},
-		Token: token,
 	}
+
+	client.initializeResources()
+	return client
 }
 
-func (c *Client) SetToken(token string) {
+func (c *Client) initializeResources() {
+	// Initialize the resources with the current client instance
+	c.Server = NewServerResource(c)
+	c.User = NewUserResource(c)
+	c.OtherUser = NewOtherUserResource(c)
+	c.ActiveUser = NewActiveUserResource(c)
+	c.Project = NewStreamResource(c)
+	c.Version = NewCommitResource(c)
+	c.Model = NewBranchResource(c)
+	c.Object = NewObjectResource(c)
+	c.Subscribe = NewSubscriptionResource(c)
+}
+
+func (c *Client) AuthenticateWithToken(token string) {
 	c.Token = token
+	// Perform any additional setup or verification here
 }
 
-func (c *Client) GetProject(projectID string) (*models.Project, error) {
-	url := fmt.Sprintf("%s/projects/%s", c.BaseURL, projectID)
-
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Authorization", "Bearer "+c.Token)
-
-	resp, err := c.HTTPClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected status code: %d", resp.StatusCode)
-	}
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-
-	var project models.Project
-	err = json.Unmarshal(body, &project)
-	if err != nil {
-		return nil, fmt.Errorf("error unmarshaling project data: %w", err)
-	}
-
-	return &project, nil
+func (c *Client) AuthenticateWithAccount(account *Account) {
+	c.Token = account.Token
+	c.Account = account
+	// Perform any additional setup or verification here
 }
