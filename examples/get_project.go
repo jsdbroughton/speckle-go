@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com:specklesystems/speckle-go/internal/api/client"
+	"github.com/jsdbroughton/speckle-go/internal/api/client"
 )
 
 func main() {
