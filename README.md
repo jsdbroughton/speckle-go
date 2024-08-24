@@ -7,7 +7,9 @@ Speckle Go is a Golang SDK for interacting with Speckle, focusing on Speckle Aut
 
 ## Project Structure
 
-- `cmd/speckle`: Contains the main application entry point
+- `cmd/examples`: Implementation examples
+  - `speckle`: Client SDK usage
+  - `speckle_automate`: Example Automate function implementation
 - `internal`: Private application and library code
   - `api`: API-related code
   - `core`: Core functionality
@@ -16,20 +18,49 @@ Speckle Go is a Golang SDK for interacting with Speckle, focusing on Speckle Aut
   - `serialization`: Serialization utilities
   - `transports`: Transport layer implementations
 - `pkg`: Library code that's ok to use by external applications
-- `examples`: Example code
+  - `speckle`: Core SDK
+  - `speckle_automate`: Automate function helpers
+  - `objects`: Isolated Objects package
 - `tests`: Additional external tests
+- `go.mod`: 
 
 ### Key Components
 
-
-
-
-- `pkg/automate`: Contains the core functionality for creating and running Speckle Automate functions.
+- `pkg/speckle`: Overall Client SDK
+- `pkg/speckle_automate`: The core functionality for creating and running Speckle Automate functions.
 - `pkg/objects`: Defines Speckle object types and interfaces.
-- `pkg/objectloader`: Provides functionality for loading Speckle objects.
-- `pkg/transports`: Implements various transport methods for Speckle data.
-- `internal/schema`: Contains the schema generation logic for Automate functions.
 
+## Usage
+
+To create a Speckle Automate function:
+
+1. Define your function inputs:
+
+```go
+type FunctionInputs struct {
+    Param1 string `json:"param1" validate:"required"`
+    Param2 int    `json:"param2"`
+}
+```
+2. Implement your function logic:
+  ```go
+  package main
+
+  import (
+      "github.com/specklesystems/speckle-go/pkg/automate"
+  )
+  
+  func main() {
+      automate.Run(automate.Function{
+          Inputs: FunctionInputs{},
+          Run: func(ctx *automate.Context[FunctionInputs]) error {
+              // Your function logic here
+              return nil
+          },
+      })
+  }
+```
+--- 
 <p ><b>Speckle</b> is the data infrastructure for the AEC industry.</p>
 
 <p>
@@ -37,14 +68,6 @@ Speckle Go is a Golang SDK for interacting with Speckle, focusing on Speckle Aut
   <a href="https://speckle.community"><img src="https://img.shields.io/discourse/users?server=https%3A%2F%2Fspeckle.community&style=flat-square&logo=discourse&logoColor=white" alt="Community forum users"></a>
   <a href="https://speckle.systems"><img src="https://img.shields.io/badge/https://-speckle.systems-royalblue?style=flat-square" alt="website"></a>
   <a href="https://speckle.guide/dev/"><img src="https://img.shields.io/badge/docs-speckle.guide-orange?style=flat-square&logo=read-the-docs&logoColor=white" alt="docs"></a>
-</p>
-
-<!-- TODO: Replace with actual Go-specific badges -->
-<p >
-  <a href="https://github.com/specklesystems/speckle-go/"><img src="https://img.shields.io/badge/build-passing-brightgreen?style=flat-square" alt="Build Status"></a>
-  <a href="https://codecov.io/gh/specklesystems/speckle-go">
-    <img src="https://img.shields.io/badge/coverage-80%25-yellowgreen?style=flat-square" alt="Code Coverage"/>
-  </a>
 </p>
 
 ## About Speckle
@@ -77,36 +100,7 @@ Give Speckle a try in no time by:
 - [![website](https://img.shields.io/badge/tutorials-speckle.systems-royalblue?style=for-the-badge&logo=youtube)](https://speckle.systems) our tutorials portal is full of resources to get you started using Speckle
 - [![docs](https://img.shields.io/badge/docs-speckle.guide-orange?style=for-the-badge&logo=read-the-docs&logoColor=white)](https://speckle.guide/dev/) reference on almost any end-user and developer functionality
 
-## Usage
 
-To create a Speckle Automate function:
-
-1. Define your function inputs:
-
-```go
-type FunctionInputs struct {
-    Param1 string `json:"param1" validate:"required"`
-    Param2 int    `json:"param2"`
-}
-```
-2. Implement your function logic:
-  ```go
-  package main
-
-  import (
-      "github.com/specklesystems/speckle-go/pkg/automate"
-  )
-  
-  func main() {
-      automate.Run(automate.Function{
-          Inputs: FunctionInputs{},
-          Run: func(ctx *automate.Context[FunctionInputs]) error {
-              // Your function logic here
-              return nil
-          },
-      })
-  }
-```
 
 ### Style guide
 
