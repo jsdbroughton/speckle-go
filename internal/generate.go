@@ -1,4 +1,4 @@
-package schema
+package internal
 
 import (
 	"reflect"
@@ -9,7 +9,7 @@ type GenerateAutomateJsonSchema struct {
 	SchemaDialect string
 }
 
-func (ags *GenerateAutomateJsonSchema) Generate(v interface{}, mode string) (map[string]interface{}, error) {
+func (ags *GenerateAutomateJsonSchema) Generate(v interface{}) (map[string]interface{}, error) {
 	schema := map[string]interface{}{
 		"$schema":    ags.SchemaDialect,
 		"title":      reflect.TypeOf(v).Name(),
