@@ -3,11 +3,13 @@
   Speckle | speckle-go 🐹
 </div>
 
-This is the Go implementation of the Speckle SDK.
+Speckle Go is a Golang SDK for interacting with Speckle, focusing on Speckle Automate functionality.
 
 ## Project Structure
 
-- `cmd/speckle`: Contains the main application entry point
+- `cmd/examples`: Implementation examples
+  - `speckle`: Client SDK usage
+  - `speckle_automate`: Example Automate function implementation
 - `internal`: Private application and library code
   - `api`: API-related code
   - `core`: Core functionality
@@ -16,13 +18,49 @@ This is the Go implementation of the Speckle SDK.
   - `serialization`: Serialization utilities
   - `transports`: Transport layer implementations
 - `pkg`: Library code that's ok to use by external applications
-- `examples`: Example code
+  - `speckle`: Core SDK
+  - `speckle_automate`: Automate function helpers
+  - `objects`: Isolated Objects package
 - `tests`: Additional external tests
+- `go.mod`: 
 
-<h3 >
-    The Go SDK
-</h3>
+### Key Components
 
+- `pkg/speckle`: Overall Client SDK
+- `pkg/speckle_automate`: The core functionality for creating and running Speckle Automate functions.
+- `pkg/objects`: Defines Speckle object types and interfaces.
+
+## Usage
+
+To create a Speckle Automate function:
+
+1. Define your function inputs:
+
+```go
+type FunctionInputs struct {
+    Param1 string `json:"param1" validate:"required"`
+    Param2 int    `json:"param2"`
+}
+```
+2. Implement your function logic:
+  ```go
+  package main
+
+  import (
+      "github.com/specklesystems/speckle-go/pkg/automate"
+  )
+  
+  func main() {
+      automate.Run(automate.Function{
+          Inputs: FunctionInputs{},
+          Run: func(ctx *automate.Context[FunctionInputs]) error {
+              // Your function logic here
+              return nil
+          },
+      })
+  }
+```
+--- 
 <p ><b>Speckle</b> is the data infrastructure for the AEC industry.</p>
 
 <p>
@@ -30,14 +68,6 @@ This is the Go implementation of the Speckle SDK.
   <a href="https://speckle.community"><img src="https://img.shields.io/discourse/users?server=https%3A%2F%2Fspeckle.community&style=flat-square&logo=discourse&logoColor=white" alt="Community forum users"></a>
   <a href="https://speckle.systems"><img src="https://img.shields.io/badge/https://-speckle.systems-royalblue?style=flat-square" alt="website"></a>
   <a href="https://speckle.guide/dev/"><img src="https://img.shields.io/badge/docs-speckle.guide-orange?style=flat-square&logo=read-the-docs&logoColor=white" alt="docs"></a>
-</p>
-
-<!-- TODO: Replace with actual Go-specific badges -->
-<p >
-  <a href="https://github.com/specklesystems/speckle-go/"><img src="https://img.shields.io/badge/build-passing-brightgreen?style=flat-square" alt="Build Status"></a>
-  <a href="https://codecov.io/gh/specklesystems/speckle-go">
-    <img src="https://img.shields.io/badge/coverage-80%25-yellowgreen?style=flat-square" alt="Code Coverage"/>
-  </a>
 </p>
 
 ## About Speckle
@@ -70,32 +100,11 @@ Give Speckle a try in no time by:
 - [![website](https://img.shields.io/badge/tutorials-speckle.systems-royalblue?style=for-the-badge&logo=youtube)](https://speckle.systems) our tutorials portal is full of resources to get you started using Speckle
 - [![docs](https://img.shields.io/badge/docs-speckle.guide-orange?style=for-the-badge&logo=read-the-docs&logoColor=white)](https://speckle.guide/dev/) reference on almost any end-user and developer functionality
 
-## Usage
 
-Send and receive data from a Speckle Server with `operations`, interact with the Speckle API with the `SpeckleClient`, create and extend your own custom Speckle Objects with `Base`, and more!
-
-For more information and usage examples, head to the [**📚 speckle-go docs**](https://speckle.guide/dev/go.html).
-
-## Developing & Debugging
-
-### Installation
-
-To use this package in your Go project, you can install it using:
-
-```bash
-go get github.com/specklesystems/speckle-go
-```
 
 ### Style guide
 
 We follow the standard Go style guidelines and use `gofmt` for code formatting. Run `gofmt` on your code before submitting a pull request.
-
-### Local Data Paths
-
-Knowing where the local accounts and object cache DBS are stored may be helpful. Depending on your OS, you can find the DBS at:
-- Windows: `APPDATA` or `<USER>\AppData\Roaming\Speckle`
-- Linux: `$XDG_DATA_HOME` or by default `~/.local/share/Speckle`
-- Mac: `~/.config/Speckle`
 
 ## Contributing
 
@@ -103,7 +112,7 @@ Please make sure you read the [contribution guidelines](.github/CONTRIBUTING.md)
 
 ## Community
 
-The Speckle Community hangs out on [the forum](https://discourse.speckle.works). Join and introduce yourself, and feel free to ask us questions!
+The Speckle Community hangs out on [the forum](https://speckle.community). Join and introduce yourself, and feel free to ask us questions!
 
 ## Security
 
@@ -111,4 +120,4 @@ For security vulnerabilities or concerns, please contact us at security[at]speck
 
 ## License
 
-Unless otherwise described, the code in this repository is licensed under the Apache-2.0 License. Please note that some modules, extensions or code herein might be otherwise licensed. This is indicated either in the folder's root under a different license file or in the respective file's header. If you have questions, please contact us via [email](mailto:hello@speckle.systems).
+Unless otherwise described, the code in this repository is licensed under the Apache-2.0 License. Please note that some modules, extensions or code herein might be otherwise licensed. This is indicated in the folder's root under a different license file or the respective file's header. If you have questions, please contact us via [email](mailto:hello@speckle.systems).
