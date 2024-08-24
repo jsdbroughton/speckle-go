@@ -3,7 +3,7 @@ package models
 type ServerInfo struct {
 	AdminContact            *string               `json:"adminContact,omitempty"`
 	AuthStrategies          *[]AuthStrategy       `json:"authStrategies,omitempty"`
-	Automate                *ServerAutomateInfo   `json:"automate,omitempty"`
+	Automate                *ServerAutomateInfo   `json:"speckle_automate,omitempty"`
 	AutomateURL             *string               `json:"automateUrl,omitempty"`
 	BlobSizeLimitBytes      *int                  `json:"blobSizeLimitBytes,omitempty"`
 	CanonicalURL            *string               `json:"canonicalUrl,omitempty"`
