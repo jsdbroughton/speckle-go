@@ -5,8 +5,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/jsdbroughton/speckle-go/internal/api/client"
-	"github.com/jsdbroughton/speckle-go/internal/api/models"
+	"github.com/jsdbroughton/speckle-go/pkg/speckle/api"
+	"github.com/jsdbroughton/speckle-go/pkg/speckle/models"
 	"github.com/machinebox/graphql"
 	"net/http"
 	"regexp"
@@ -14,10 +14,10 @@ import (
 )
 
 type ServerResource struct {
-	Client *client.Client
+	Client *api.Client
 }
 
-func NewServerResource(client *client.Client) *ServerResource {
+func NewServerResource(client *api.Client) *ServerResource {
 	return &ServerResource{Client: client}
 }
 
