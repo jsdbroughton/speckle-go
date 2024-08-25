@@ -36,12 +36,11 @@ func initializeAutomationContext(runData schema.AutomationRunData, speckleToken 
 }
 
 func createSpeckleClient(serverUrl, token string) (*api.Client, error) {
-	// Implement Speckle client creation logic
-	// This is a placeholder and needs to be implemented based on the Speckle Go SDK
-	client := &api.Client{}
-	err := client.AuthenticateWithToken(token)
-	if err != nil {
-		return nil, err
+	client := &api.Client{
+		ServerUrl: serverUrl,
+	}
+	if err := client.AuthenticateWithToken(token); err != nil {
+		return nil, fmt.Errorf("failed to create Speckle client: %w", err)
 	}
 	return client, nil
 }
