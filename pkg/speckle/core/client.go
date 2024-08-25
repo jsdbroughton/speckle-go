@@ -10,22 +10,6 @@ import (
 	"github.com/jsdbroughton/speckle-go/internal/api/resources"
 )
 
-// Client represents the core functionality of the Speckle client
-type Client struct {
-	BaseURL    string
-	HTTPClient *http.Client
-	Token      string
-	Server     *resources2.ServerResource
-	User       *resources.UserResource
-	OtherUser  *resources.OtherUserResource
-	ActiveUser *resources.ActiveUserResource
-	Project    *resources.ProjectResource
-	Version    *resources.VersionResource
-	Model      *resources.ModelResource
-	Object     *resources.ObjectResource
-	Subscribe  *resources.SubscriptionResource
-}
-
 // NewCoreClient initializes a new core Speckle Client
 func NewCoreClient(baseURL string, useSSL bool) *Client {
 	scheme := "http"
@@ -47,7 +31,7 @@ func (c *Client) initializeResources() {
 	c.User = resources.NewUserResource(c)
 	c.OtherUser = resources.NewOtherUserResource(c)
 	c.ActiveUser = resources.NewActiveUserResource(c)
-	c.Project = resources.NewProjectResource(c)
+	c.Project = resources2.NewProjectResource(c)
 	c.Version = resources.NewVersionResource(c)
 	c.Model = resources.NewModelResource(c)
 	c.Object = resources.NewObjectResource(c)
